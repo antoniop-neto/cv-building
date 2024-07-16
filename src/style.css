@@ -46,6 +46,10 @@ body {
   transition: 0.5s;
 }
 
+.selected {
+  background-color: lightgray;
+}
+
 .sidebar li h3 {
   grid-row: 1;
   grid-column: 2;
