@@ -40,8 +40,12 @@ export default function App() {
   function handleSectionContent(subtitle, description) {
     setSections((sections) =>
       sections.map((section) =>
-        section.id === selected.id
-          ? { ...section, subtitle: subtitle, description: description }
+        section.id === selected?.id
+          ? {
+              ...section,
+              subtitle: subtitle,
+              description: description,
+            }
           : section
       )
     );
@@ -71,10 +75,7 @@ export default function App() {
           {showAddSection ? "Close" : "+ New section"}
         </Button>
       </div>
-      <AddSectionContent
-        selected={selected}
-        onSectionContent={handleSectionContent}
-      />
+      <AddSectionContent onSectionContent={handleSectionContent} />
     </div>
   );
 }
@@ -134,7 +135,6 @@ function AddSectionForm({ onAddNewSection }) {
       title: title,
     };
     onAddNewSection(newSection);
-    console.log(newSection);
   }
 
   return (
@@ -146,13 +146,16 @@ function AddSectionForm({ onAddNewSection }) {
   );
 }
 
-function AddSectionContent({ selected, onSectionContent }) {
+function AddSectionContent({ onSectionContent }) {
   const [subtitle, setSubtitle] = useState("");
   const [description, setDescription] = useState("");
 
   function handleSubmit(e) {
     e.preventDefault();
+
     onSectionContent(subtitle, description);
+    setSubtitle("");
+    setDescription("");
   }
 
   return (
